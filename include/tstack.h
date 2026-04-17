@@ -2,43 +2,45 @@
 #ifndef INCLUDE_TSTACK_H_
 #define INCLUDE_TSTACK_H_
 
+#include <string>
+
 template<typename T, int size>
 class TStack {
-  private:
-    T arr[size];
-    int top;
+ private:
+  T arr[size];
+  int top;
 
-public:
-    TStack() : top(-1) {}
+ public:
+  TStack() : top(-1) {}
 
-    bool isEmpty() const {
-        return top == -1;
+  bool isEmpty() const {
+    return top == -1;
+  }
+
+  bool isFull() const {
+    return top >= size - 1;
+  }
+
+  void push(T item) {
+    if (isFull()) {
+      throw std::string("Stack full");
     }
+    arr[++top] = item;
+  }
 
-    bool isFull() const {
-        return top >= size - 1;
+  T pop() {
+    if (isEmpty()) {
+      throw std::string("Stack empty");
     }
+    return arr[top--];
+  }
 
-    void push(T item) {
-        if (isFull()) {
-            throw std::string("Full");
-        }
-        arr[++top] = item;
+  T get() const {
+    if (isEmpty()) {
+      throw std::string("Stack empty");
     }
-
-    T pop() {
-        if (isEmpty()) {
-            throw std::string("Empty");
-        }
-        return arr[top--];
-    }
-
-    T get() const {
-        if (isEmpty()) {
-            throw std::string("Empty");
-        }
-        return arr[top];
-    }
+    return arr[top];
+  }
 };
 
 #endif  // INCLUDE_TSTACK_H_
