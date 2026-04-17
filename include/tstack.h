@@ -7,7 +7,7 @@
 template<typename T, int size>
 class TStack {
  private:
-  T arr[size];
+  T arr[size] = {};
   int top;
 
  public:
